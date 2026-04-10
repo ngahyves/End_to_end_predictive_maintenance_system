@@ -33,3 +33,7 @@ matplotlib==3.10.8
 # --- Database ---
 psycopg2-binary==2.9.11
 SQLAlchemy==2.0.45
+
+# --- Testing and Quality ---
+pytest==8.0.0
+httpx==0.27.0
