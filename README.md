@@ -80,18 +80,22 @@ We monitor the P95 Latency to ensure the system meets industrial requirements. T
 <img src="reports/screenshots/prometheus.png" width="45%" />
 <img src="reports/screenshots/grafana_p95.png" width="45%" />
 </p>
-Data Drift Detection (Evidently AI)
-
+### Data Drift Detection (Evidently AI)
 Automated statistical monitoring to detect shifts in sensor distributions (e.g., sudden temperature increases) and trigger retraining flows.
+
 <p align="center">
-  <img src="reports/screenshots/drift_monitoring.png" width="45%" />
+  <img src="reports/screenshots/drift_monitoring.png" width="70%" />
 </p>
 
 <p align="center">
-  <a href="reports/evidently_monitoring/drift_report.html">🔗 View Full Interactive Drift Report</a>
+  <a href="https://htmlpreview.github.io/?https://github.com/ngahyves/End_to_end_predictive_maintenance_system/blob/main/reports/evidently_monitoring/drift_report.html" target="_blank">
+    <b>🔗 View Full Interactive Drift Report</b>
+  </a>
 </p>
 
-⚙️ Workflow Orchestration (Prefect)
+---
+
+### ⚙️ Workflow Orchestration (Prefect)
 
 The entire pipeline is automated. Prefect ensures that if a stage fails (e.g., network error or schema mismatch), the system alerts the team and manages retries autonomously.
 <p align="center">
