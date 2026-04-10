@@ -87,11 +87,9 @@ Automated statistical monitoring to detect shifts in sensor distributions (e.g.,
   <img src="reports/screenshots/drift_monitoring.png" width="70%" />
 </p>
 
-<p align="center">
-  <a href="https://htmlpreview.github.io/?https://github.com/ngahyves/End_to_end_predictive_maintenance_system/blob/main/reports/evidently_monitoring/drift_report.html" target="_blank">
-    <b>🔗 View Full Interactive Drift Report</b>
-  </a>
-</p>
+> 💡 **Interactive Report:** Due to GitHub security policies, JavaScript-heavy reports are not rendered directly. 
+> 1. [**Download the full HTML report here**](https://github.com/ngahyves/End_to_end_predictive_maintenance_system/raw/main/reports/evidently_monitoring/drift_report.html)
+> 2. Open the downloaded file in your browser to access interactive charts.
 
 ---
 
