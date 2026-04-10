@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+env/
+venv/
+.env
+
+# Data & Artifacts
+data/
+artifacts/
+mlruns/
+.prefect/
+
+# Version Control
+.git
+.github
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+logs/*.log

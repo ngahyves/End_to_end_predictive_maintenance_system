@@ -1,0 +1,117 @@
+project_name: "maintenance_mlops"
+
+#For logging reports and informations
+logging:
+  log_file: "logs/pipeline.log"
+  level: "INFO"
+
+#Setting paths
+paths:
+  data_url: "https://raw.githubusercontent.com/amolsontakke/AI4I-2020-Predictive-Maintenance-Dataset/main/ai4i2020.csv"
+  raw_data_path: "data/raw/ai4i2020.csv"
+  data_hash: "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e"
+  processed_data_dir: "data/processed"
+  processor_path: "artifacts/preprocessor.joblib"
+  model_path: "artifacts/model.pkl"
+  shap_path: "artifacts/shap_explainer.pkl"
+
+#Variables
+features:
+  numerical: 
+    - "Air temperature [K]"
+    - "Process temperature [K]"
+    - "Rotational speed [rpm]"
+    - "Torque [Nm]"
+    - "Tool wear [min]"
+  categorical: 
+    - "Type"
+  targets: 
+    - "HDF"
+    - "PWF"
+    - "OSF"
+    - "RNF"
+    - "TWF"
+
+# mlflow tracking
+mlflow:
+  tracking_uri: "file:./mlruns"
+  experiment_name: "maintenance_experiment"
+
+# Candidates for the training
+models:
+  evaluation_metric: "f1_macro"
+  secondary_metric: "average_precision_macro"
+
+  candidates:
+    - type: "logistic_regression"
+      params:
+        C: 1.0
+        penalty: "l2"
+        solver: "lbfgs"
+        max_iter: 1000
+        class_weight: "balanced"
+
+    - type: "random_forest"
+      params:
+        n_estimators: 100
+        max_depth: 10
+        class_weight: "balanced"
+
+    - type: "xgboost"
+      params:
+        n_estimators: 200
+        learning_rate: 0.1
+        max_depth: 6
+        n_jobs: -1
+
+    - type: "lightgbm"
+      params:
+        n_estimators: 200
+        learning_rate: 0.1
+        max_depth: 6
+        verbose: -1
+
+    - type: "svm"
+      params:
+        C: 1.0
+        kernel: "rbf"
+        gamma: "scale"
+        probability: true
+        class_weight: "balanced"
+
+  # Optuna search
+  search_space:
+    xgboost:
+      n_estimators: [100, 500]
+      learning_rate: [0.01, 0.2]
+      max_depth: [3, 10]
+    
+    lightgbm:
+      n_estimators: [100, 500]
+      learning_rate: [0.01, 0.2]
+      max_depth: [3, 10]
+
+    svm:
+      C: [0.1, 10.0]
+      gamma: ["scale", "auto"]
+
+# SHAP
+explainability:
+  shap:
+    enabled: true
+    type: "tree"
+    sample_size: 100
+    output_format: "json"
+
+#Data drift monitoring
+monitoring:
+  drift_threshold: 0.05
+  alert_email: "alert@example.com"
+  drift_report_path: "data/drift/drift_report.html"
+
+#Orchestration with prefect
+prefect:
+  enabled: true
+  retries: 3
+  retry_delay_seconds: 5
+  schedule: "daily"

@@ -1,0 +1,46 @@
+# --- Environment & Python ---
+env/
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Data & Artifacts ---
+data/**/*.csv
+data/**/*.parquet
+data/**/*.json
+artifacts/
+logs/
+mlruns/
+.prefect/
+catboost_info/
+lightning_logs/
+
+# --- Models ---
+models/*.pkl
+models/*.joblib
+
+# --- Temporary / Generated ---
+*.h5
+*.tmp
+*.cache
+
+# --- Configuration & Secrets ---
+.env
+config/local_config.yaml
+
+# --- IDE & OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- UI / Dashboards ---
+.streamlit/
+
+# --- Docker ---
+docker-compose.override.yml

@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # --- Service 1 : API FastAPI ---
+  api:
+    build:
+      context: .. 
+      dockerfile: deployment/Dockerfile
+    container_name: maintenance-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../artifacts:/app/artifacts
+      - ../mlruns:/app/mlruns
+    environment:
+      - MLFLOW_TRACKING_URI=file:///app/mlruns
+    networks:
+      - mlops_network
+
+  # --- Service 2 : MLflow UI ---
+  mlflow_server:
+    image: ghcr.io/mlflow/mlflow:latest
+    container_name: mlflow-server
+    ports:
+      - "5000:5000"
+    command: >
+      mlflow ui 
+      --host 0.0.0.0 
+      --port 5000 
+      --backend-store-uri /app/mlruns 
+      --default-artifact-root /app/mlruns
+    volumes:
+      - ../mlruns:/app/mlruns
+    networks:
+      - mlops_network
+
+  # --- Service 3 : Prometheus ---
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - mlops_network
+
+  # --- Service 4 : Grafana ---
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - mlops_network
+    depends_on:
+      - prometheus
+
+# --- Network section ---
+networks:
+  mlops_network:
+    driver: bridge
+
+# --- VOLUMES section---
+volumes:
+  grafana_data:
