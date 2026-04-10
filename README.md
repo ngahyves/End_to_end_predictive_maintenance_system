@@ -1,7 +1,7 @@
 # 🚀 End-to-End Multi-label MLOps: Industrial Predictive Maintenance
 [![MLOps_Pipeline_CI_CD](https://github.com/ngahyves/End_to_end_predictive_maintenance_system/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/ngahyves/End_to_end_predictive_maintenance_system/actions/workflows/ci-cd.yml)
 
-> **Objective:** Transitioning from experimental notebooks to a resilient, production-ready system. This project predicts 5 specific failure modes simultaneously while optimizing for low-latency serving and infrastructure cost-efficiency.
+> **Objective:** This project forms part of a predictive maintenance analysis in the industrial sector. The aim is to analyse a dataset containing operational machine measurements (temperatures, speed, torque, wear) in order to identify the factors associated with failures.Transitioning from experimental notebooks to a resilient, production-ready system. This project predicts 5 specific failure modes simultaneously while optimizing for low-latency serving and infrastructure cost-efficiency.
 
 ## 📊 Key Results & Engineering Impact
 *   **Best Model:** LightGBM (MultiOutput Architecture) optimized via **Optuna**.
